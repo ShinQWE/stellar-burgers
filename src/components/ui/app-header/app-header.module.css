@@ -185,34 +185,3 @@
   rotate: 180deg;
   transition: rotate ease 0.3s;
 }
-
-@media (width < 1201px) {
-  .menu {
-    padding: 12px 8px;
-  }
-
-  .menu_part_left,
-  .menu_part_right {
-    display: none;
-  }
-
-  .logo {
-    grid-column: 2 / 3;
-  }
-
-  .mobile_menu {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-}
-
-@media (width < 651px) {
-  .mobile_menu_wrapper {
-    width: 100%;
-  }
-
-  .logo {
-    max-width: 220px;
-  }
-}
