@@ -4,14 +4,16 @@ import { useLocation } from 'react-router-dom';
 import { OrderCardProps } from './type';
 import { TIngredient } from '@utils-types';
 import { OrderCardUI } from '../ui/order-card';
-
-const maxIngredients = 6;
+import { useSelector } from '../../services/store';
+import { getIngredientsSelector } from '@slices';
+import { useResize } from '../hooks/useHooks';
 
 export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
+  const screenSize = useResize();
+  const maxIngredients = screenSize > 576 ? 6 : 4;
   const location = useLocation();
 
-  /** TODO: взять переменную из стора */
-  const ingredients: TIngredient[] = [];
+  const ingredients: TIngredient[] = useSelector(getIngredientsSelector);
 
   const orderInfo = useMemo(() => {
     if (!ingredients.length) return null;

@@ -1,40 +1,72 @@
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { resetPasswordApi } from '@api';
 import { ResetPasswordUI } from '@ui-pages';
+import { useDispatch, useSelector } from '../../services/store';
+import {
+  isErrorSelector,
+  isLoadingSelector,
+  resetErrorMessage,
+  resetPassword
+} from '@slices';
+import { Preloader } from '@ui';
+import { useForm } from '../../components/hooks/useHooks';
 
 export const ResetPassword: FC = () => {
   const navigate = useNavigate();
-  const [password, setPassword] = useState('');
-  const [token, setToken] = useState('');
-  const [error, setError] = useState<Error | null>(null);
+  const dispatch = useDispatch();
+  const [formData, handleInputChange, handleSubmit, inputErrors, isValid] =
+    useForm({
+      password: '',
+      token: ''
+    });
 
-  const handleSubmit = (e: SyntheticEvent) => {
-    e.preventDefault();
-    setError(null);
-    resetPasswordApi({ password, token })
-      .then(() => {
-        localStorage.removeItem('resetPassword');
-        navigate('/login');
-      })
-      .catch((err) => setError(err));
+  const [errors, setErrors] = useState({
+    password: false,
+    token: false
+  });
+
+  const isError = useSelector(isErrorSelector);
+  const isLoading = useSelector(isLoadingSelector);
+
+  const onSubmit = (e: SyntheticEvent) => {
+    handleSubmit(e);
+    setErrors({ ...errors, ...inputErrors });
+    if (isValid)
+      dispatch(
+        resetPassword({ password: formData.password, token: formData.token })
+      )
+        .then((data) => {
+          if (data.payload) {
+            localStorage.removeItem('resetPassword');
+            navigate('/login');
+          }
+        })
+        .catch(() => console.log('Ошибка сброса пароля'));
+  };
+
+  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setErrors({ ...errors, [e.target.name]: false });
   };
 
   useEffect(() => {
+    dispatch(resetErrorMessage());
     if (!localStorage.getItem('resetPassword')) {
       navigate('/forgot-password', { replace: true });
     }
-  }, [navigate]);
+  }, [navigate, dispatch]);
+
+  if (isLoading) return <Preloader />;
 
   return (
     <ResetPasswordUI
-      errorText={error?.message}
-      password={password}
-      token={token}
-      setPassword={setPassword}
-      setToken={setToken}
-      handleSubmit={handleSubmit}
+      errorText={isError ? 'Указан неверный код подтверждения' : ''}
+      password={formData.password}
+      token={formData.token}
+      handleSubmit={onSubmit}
+      handleInputChange={handleInputChange}
+      errors={errors}
+      onFocus={onFocus}
     />
   );
 };

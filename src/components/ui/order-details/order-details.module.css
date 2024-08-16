@@ -10,5 +10,9 @@
 }
 
 .text {
+  text-align: center;
+}
+
+.text_accent {
   color: #8585ad;
 }

@@ -1,14 +1,12 @@
 .container {
   display: flex;
-  max-width: 1240px;
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
+  width: 1240px;
 }
 
 .wrapCenter {
   margin: auto;
-  width: 480px;
+  max-width: 480px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,16 +14,16 @@
 }
 
 .form {
-  width: 100%;
-}
-
-.form div {
-  width: 100%;
-  text-align: right;
+  width: 480px;
 }
 
 .title {
   margin: 0;
+}
+
+.input {
+  max-width: 480px;
+  width: 100%;
 }
 
 .button {
@@ -35,6 +33,9 @@
 
 .question {
   color: #8585ad;
+  text-align: center;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
 .link {
