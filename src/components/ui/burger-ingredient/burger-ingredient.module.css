@@ -2,22 +2,37 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
 .article {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 260px;
   cursor: pointer;
   text-decoration: none;
   color: #ffff;
+  transform: translateY(0%);
+  transition: transform ease-out 0.2s;
+}
+
+.article:hover {
+  transform: translateY(4%);
+  transition: transform ease-out 0.2s;
+}
+
+.img {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  align-self: center;
 }
 
 .cost {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .text {
@@ -25,6 +40,18 @@
 }
 
 .addButton {
-  width: 260px;
-  justify-content: center;
+  padding: 0;
+  color: #ffff;
 }
+
+.addButton:hover {
+  color: var(--text-inactive-color);
+  transition: all ease-in 0.1s;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+

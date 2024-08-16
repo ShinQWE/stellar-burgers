@@ -18,12 +18,18 @@ type Story = StoryObj<typeof meta>;
 
 export const LoggedIn: Story = {
   args: {
-    userName: 'John Doe'
+    userName: 'John Doe',
+    onCloseClick: () => {},
+    onMenuIconClick: () => {},
+    isOpen: false
   }
 };
 
 export const LoggedOut: Story = {
   args: {
-    userName: undefined
+    userName: undefined,
+    onCloseClick: () => {},
+    onMenuIconClick: () => {},
+    isOpen: false
   }
 };

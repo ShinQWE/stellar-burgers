@@ -1,0 +1,47 @@
+.page {
+   display: flex;
+   flex-direction: column;
+   background-color: #131316;
+   color: #f2f2f3;
+   height: 100dvh;
+   position: relative;
+ }
+ 
+ .main {
+   display: flex;
+   flex-direction: column;
+   overflow: hidden;
+   max-width: 1260px;
+   margin: 0 auto;
+   height: 100dvh;
+   box-sizing: border-box;
+ }
+ 
+ .main_profile {
+   display: flex;
+   overflow: hidden;
+   max-width: 1240px;
+   margin: 0 auto;
+   height: 100%;
+ }
+ 
+ ::-webkit-scrollbar {
+   width: 8px;
+ }
+ 
+ ::-webkit-scrollbar-track {
+   background: #2f2f37;
+ }
+ 
+ ::-webkit-scrollbar-thumb {
+   border: 3px solid #8585ad;
+   background: #8585ad;
+ }
+ 
+ .detailPageWrap {
+   margin: 120px auto;
+ }
+ 
+ .detailHeader {
+   text-align: center;
+ }
