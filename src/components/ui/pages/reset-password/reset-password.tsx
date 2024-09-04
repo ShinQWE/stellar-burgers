@@ -1,22 +1,21 @@
 import { FC } from 'react';
-import {
-  Input,
-  Button,
-  PasswordInput
-} from '@zlden/react-developer-burger-ui-components';
+import { Button } from '@zlden/react-developer-burger-ui-components';
 import styles from '../common.module.css';
 import { Link } from 'react-router-dom';
 import { ResetPasswordUIProps } from './type';
+import { PasswordInput } from '../../password-input';
+import { Input } from '@ui';
 
 export const ResetPasswordUI: FC<ResetPasswordUIProps> = ({
   errorText,
   password,
-  setPassword,
   handleSubmit,
   token,
-  setToken
+  handleInputChange,
+  errors,
+  onFocus
 }) => (
-  <main className={styles.container}>
+  <>
     <div className={`pt-6 ${styles.wrapCenter}`}>
       <h3 className='pb-6 text text_type_main-medium'>Восстановление пароля</h3>
       <form
@@ -26,25 +25,35 @@ export const ResetPasswordUI: FC<ResetPasswordUIProps> = ({
       >
         <div className='pb-6'>
           <PasswordInput
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            name='password'
+            password={password}
+            onChange={handleInputChange}
+            error={errors.password}
+            errorText='Не менее 6 символов, включая заглавные буквы и цифры'
+            onFocus={onFocus}
+            extraClass={styles.input}
           />
         </div>
         <div className='pb-6'>
           <Input
             type='text'
             placeholder='Введите код из письма'
-            onChange={(e) => setToken(e.target.value)}
+            onChange={handleInputChange}
             value={token}
             name='token'
-            error={false}
+            error={errors.token}
             errorText=''
-            size='default'
+            size={'default'}
+            onFocus={onFocus}
+            extraClass={styles.input}
           />
         </div>
         <div className={`pb-6 ${styles.button}`}>
-          <Button type='primary' size='medium' htmlType='submit'>
+          <Button
+            type='primary'
+            size='medium'
+            htmlType='submit'
+            disabled={password && token ? false : true}
+          >
             Сохранить
           </Button>
         </div>
@@ -61,5 +70,5 @@ export const ResetPasswordUI: FC<ResetPasswordUIProps> = ({
         </Link>
       </div>
     </div>
-  </main>
+  </>
 );

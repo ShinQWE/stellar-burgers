@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import { FC, memo } from 'react';
 
 import styles from './feed-info.module.css';
 
@@ -9,7 +9,7 @@ export const FeedInfoUI: FC<FeedInfoUIProps> = memo(
     const { total, totalToday } = feed;
 
     return (
-      <section>
+      <section className={styles.wrapper}>
         <div className={styles.columns}>
           <HalfColumn
             orders={readyOrders}
@@ -26,16 +26,16 @@ export const FeedInfoUI: FC<FeedInfoUIProps> = memo(
 );
 
 const HalfColumn: FC<HalfColumnProps> = ({ orders, title, textColor }) => (
-  <div className={`pr-6 ${styles.column}`}>
+  <div className={styles.column}>
     <h3 className={`text text_type_main-medium ${styles.title}`}>{title}:</h3>
-    <ul className={`pt-6  ${styles.list}`}>
+    <ul className={styles.list}>
       {orders.map((item, index) => (
         <li
-          className={`text text_type_digits-default ${styles.list_item}`}
+          className={styles.list_item}
           style={{ color: textColor === 'blue' ? '#00cccc' : '#F2F2F3' }}
           key={index}
         >
-          {item}
+          <p className='text text_type_digits-default'>{item}</p>
         </li>
       ))}
     </ul>
@@ -44,9 +44,15 @@ const HalfColumn: FC<HalfColumnProps> = ({ orders, title, textColor }) => (
 
 const Column: FC<TColumnProps> = ({ title, content }) => (
   <>
-    <h3 className={`pt-15 text text_type_main-medium ${styles.title}`}>
-      {title}:
+    <h3 className={styles.title}>
+      <span className={`text text_type_main-medium ${styles.title_text}`}>
+        {title}:
+      </span>
+      <span
+        className={`text text_type_digits-large ${styles.text_shadow} ${styles.title_text} ${styles.title_text_accent}`}
+      >
+        {content}
+      </span>
     </h3>
-    <p className={`text text_type_digits-large ${styles.content}`}>{content}</p>
   </>
 );

@@ -1,7 +1,19 @@
-.menu {
-  width: 320px;
+.container {
+  width: 1240px;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .form {
   max-width: 480px;
+  margin-top: 120px;
 }
+
+.menu {
+  width: 320px;
+}
+
+.title {
+  display: none;
+}
+

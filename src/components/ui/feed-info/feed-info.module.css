@@ -2,6 +2,7 @@
   display: flex;
   justify-content: left;
   align-items: flex-start;
+  column-gap: 16px;
 }
 .column {
   display: inline;
@@ -12,6 +13,7 @@
   list-style: none;
   margin: 0;
   padding-left: 0;
+  padding-top: 16px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -19,16 +21,24 @@
   overflow: hidden;
 }
 
-.title {
-  margin: 0;
-  text-align: left;
-}
-
 .list_item {
   text-align: left;
   min-width: 50%;
 }
 
-.content {
+.title {
+  margin: 0;
+  padding-top: 20px;
   text-align: left;
+}
+
+.title_text {
+  display: block;
+}
+
+.text_shadow {
+  text-shadow:
+    0 0 16px rgba(51, 51, 255, 0.25),
+    0 0 8px rgba(51, 51, 255, 0.25),
+    0 4px 32px rgba(51, 51, 255, 0.5);
 }

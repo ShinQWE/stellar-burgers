@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CurrencyIcon,
@@ -36,11 +36,11 @@ export const OrderCardUI: FC<OrderCardUIProps> = memo(
         <ul className={styles.ingredients}>
           {orderInfo.ingredientsToShow.map((ingredient, index) => {
             let zIndex = maxIngredients - index;
-            let right = 20 * index;
+            let right = -20 * index;
             return (
               <li
                 className={styles.img_wrap}
-                style={{ zIndex: zIndex, right: right }}
+                style={{ zIndex: zIndex, translate: right }}
                 key={index}
               >
                 <img
@@ -65,7 +65,7 @@ export const OrderCardUI: FC<OrderCardUIProps> = memo(
             );
           })}
         </ul>
-        <div>
+        <div className={styles.cost}>
           <span
             className={`text text_type_digits-default pr-1 ${styles.order_total}`}
           >
