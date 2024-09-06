@@ -19,20 +19,33 @@ describe('ТЕСТ ГЛАВНОЙ СТРАНИЦЫ', () => {
     cy.get(`[data-cy=${'643d69a5c3f7b9001cfa0942'}]`).as('testSauce');
   });
 
-  it('добавление ингредиентов в конструктор', () => {
+  it('добавление булки в конструктор', () => {
+    cy.get('[data-cy="constructorItemBun"]').should('not.exist');
+
     cy.clickButton('@testBun');
+
     cy.get('[data-cy="constructorItemBun"]')
       .find('span')
       .contains('Краторная булка N-200i')
       .should('exist');
+  });
+
+  it('добавление начинки в конструктор', () => {
+    cy.get('[data-cy="constructorItemFilling"]').should('not.exist');
 
     cy.clickButton('@testFilling');
+
     cy.get('[data-cy="constructorItemFilling"]')
       .find('span')
       .contains('Филе Люминесцентного тетраодонтимформа')
       .should('exist');
+  });
+
+  it('добавление соуса в конструктор', () => {
+    cy.get('[data-cy="constructorItemFilling"]').should('not.exist');
 
     cy.clickButton('@testSauce');
+
     cy.get('[data-cy="constructorItemFilling"]')
       .find('span')
       .contains('Соус Spicy-X')
@@ -41,12 +54,14 @@ describe('ТЕСТ ГЛАВНОЙ СТРАНИЦЫ', () => {
 
   describe('ТЕСТ МОДАЛКИ ИНГРИДИЕНТА', () => {
     beforeEach(() => {
+      cy.get('[data-cy="modal"]').should('not.exist');
       cy.get('@testBun').find('a').click();
       cy.get('[data-cy="modal"]').as('modal');
     });
 
     it('открытие модалки', () => {
       cy.get('@modal').should('exist');
+      cy.get('@modal').find('h3').should('exist');
     });
 
     it('закрытие на крестик', () => {
