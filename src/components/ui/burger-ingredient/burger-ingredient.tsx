@@ -36,6 +36,7 @@ export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
             onClick={handleAdd}
             extraClass={`${styles.addButton}`}
           >
+            <span className={styles.plusSign}>+</span>
             Добавить
           </Button>
         </div>

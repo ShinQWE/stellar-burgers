@@ -25,12 +25,12 @@ const FEED = async () => {
 };
 
 const ORDER = async () => {
-  const { Modal, OrderInfo } = await import('@components');
+  const { OrderInfo, OrderModalWrapper } = await import('@components');
   return {
     element: (
-      <Modal title='Детали заказа'>
+      <OrderModalWrapper>
         <OrderInfo />
-      </Modal>
+      </OrderModalWrapper>
     )
   };
 };

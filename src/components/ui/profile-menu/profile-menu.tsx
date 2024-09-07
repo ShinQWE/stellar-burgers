@@ -13,6 +13,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
       className={({ isActive }) =>
         `${styles.link} ${styles.text} ${styles.first_link} ${isActive ? styles.link_active : ''}`
       }
+      end
     >
       Профиль
     </NavLink>
@@ -21,6 +22,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
       className={({ isActive }) =>
         `${styles.link} ${styles.text} ${isActive ? styles.link_active : ''}`
       }
+      end
     >
       История заказов
     </NavLink>
