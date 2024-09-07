@@ -39,3 +39,30 @@ export const Modal: FC<TModalProps> = memo(
     );
   }
 );
+
+import { useMatch } from 'react-router-dom';
+
+export const OrderModalWrapper: FC<{
+  onClosePath?: string;
+  children: React.ReactNode;
+  onClose?: () => void;
+}> = memo(({ onClosePath, children, onClose }) => {
+  // Извлечение номера заказа из URL
+  const profileMatch = useMatch('/profile/orders/:number')?.params.number;
+  const feedMatch = useMatch('/feed/:number')?.params.number;
+  const orderNumber = profileMatch || feedMatch;
+
+  const formattedOrderNumber = orderNumber
+    ? orderNumber.padStart(5, '0')
+    : '00000';
+
+  return (
+    <Modal
+      title={`Номер заказа: ${formattedOrderNumber}`}
+      onClosePath={onClosePath}
+      onClose={onClose}
+    >
+      {children}
+    </Modal>
+  );
+});

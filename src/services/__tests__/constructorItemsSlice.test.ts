@@ -3,7 +3,9 @@ import {
   constructorItemsReducer,
   initialState,
   moveUpConstructorItem,
-  removeConstructorItem
+  moveDownConstructorItem,
+  removeConstructorItem,
+  resetConstructorItems
 } from '@slices';
 
 describe('ТЕСТ СЛАЙСА constructorItemSlice', () => {
@@ -108,36 +110,51 @@ describe('ТЕСТ СЛАЙСА constructorItemSlice', () => {
   it('удалить ингредиент', () => {
     const newState = constructorItemsReducer(
       testInitialState,
-      removeConstructorItem(2)
+      removeConstructorItem(2) // Удаляем третий ингредиент
     );
     expect(newState.constructorItems.ingredients).toEqual(
-      testConstructorItems.ingredients.slice(0, 2)
+      testConstructorItems.ingredients.slice(0, 2) // Ожидаем, что остались только первые два ингредиента
     );
   });
 
   describe('ИЗМЕНИТЬ ПОРЯДОК ИНГРИДИЕНТОВ В НАЧИНКЕ', () => {
     it('переместить элемент вверх', () => {
-      const movedItem = testConstructorItems.ingredients.slice(-1)[0];
+      const movedItem = testConstructorItems.ingredients[2]; // Соус Spicy-X
       const newState = constructorItemsReducer(
         testInitialState,
         moveUpConstructorItem(movedItem)
       );
-      const expectedState = [...testConstructorItems.ingredients];
-      expectedState.splice(-1);
-      expectedState.splice(1, 0, movedItem);
+      const expectedState = [
+        testConstructorItems.ingredients[0],
+        movedItem,
+        testConstructorItems.ingredients[1]
+      ];
       expect(newState.constructorItems.ingredients).toEqual(expectedState);
     });
 
     it('переместить элемент вниз', () => {
-      const movedItem = testConstructorItems.ingredients.slice(-3)[0];
+      const movedItem = testConstructorItems.ingredients[1]; // Мини-салат
       const newState = constructorItemsReducer(
         testInitialState,
-        moveUpConstructorItem(movedItem)
+        moveDownConstructorItem(movedItem)
       );
-      const expectedState = [...testConstructorItems.ingredients];
-      expectedState.splice(-3, 1);
-      expectedState.splice(1, 0, movedItem);
+      const expectedState = [
+        testConstructorItems.ingredients[0],
+        testConstructorItems.ingredients[2],
+        movedItem
+      ];
       expect(newState.constructorItems.ingredients).toEqual(expectedState);
+    });
+  });
+
+  it('сбросить конструктор', () => {
+    const newState = constructorItemsReducer(
+      testInitialState,
+      resetConstructorItems()
+    );
+    expect(newState.constructorItems).toEqual({
+      bun: null,
+      ingredients: []
     });
   });
 });

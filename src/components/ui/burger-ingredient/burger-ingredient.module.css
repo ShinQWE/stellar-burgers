@@ -32,26 +32,46 @@
 .cost {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .text {
   text-align: center;
 }
 
-.addButton {
-  padding: 0;
-  color: #ffff;
-}
-
-.addButton:hover {
-  color: var(--text-inactive-color);
-  transition: all ease-in 0.1s;
-}
-
 .footer {
-  display: flex;
-  justify-content: space-between;
+  display: grid; 
+  grid-template-columns: 1fr; 
+  margin: 0 auto;
   margin-top: 24px;
 }
 
+.addButton {
+  display: flex; 
+  align-items: center; 
+  margin-top: 4px;
+  padding: 10px 20px; 
+  color: #ffff; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: all ease-in 0.1s; 
+}
+
+.addButton:hover {
+  color: var(--text-inactive-color); 
+}
+
+.addButton:hover .plusSign {
+  color: var(--text-inactive-color);
+}
+
+.plusSign {
+  display: inline-block; 
+  width: 20px; 
+  height: 27px; 
+  font-size: 20px; 
+  text-align: center; 
+  margin-right: 8px; 
+  color: #ffff; 
+}
